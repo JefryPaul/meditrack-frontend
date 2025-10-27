@@ -1,23 +1,30 @@
 import Header from "./Components/Header"
-import Admin from "./Pages/Admin" 
+import Admin from "./Pages/Admin"
 import History from "./Pages/History"
 import LandingPage from "./Pages/LandingPage"
 import Preview from "./Pages/Preview"
 import SelectMedicines from "./Pages/SelectMedicines"
-import Userview from "./Pages/Userview"
+import UserView from "./Pages/UserView" 
+import { Routes, Route } from 'react-router-dom'; 
+import Footer from "./Components/Footer"
+
 
 function App() {
 
   return (
     <>
-      <h1>Hello</h1> 
-      <Header /> 
-      <Admin /> 
-      <History /> 
-      <LandingPage /> 
-      <Preview /> 
-      <SelectMedicines /> 
-      <Userview />
+      <Header />
+
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='admin' element={<Admin />} />
+        <Route path='view' element={<UserView />} />
+        <Route path='select'element={<SelectMedicines />} />
+        <Route path='preview' element={<Preview />} /> 
+        <Route path='history' element={<History />} />
+      </Routes>
+
+      <Footer />
     </>
   )
 }
