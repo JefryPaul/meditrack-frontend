@@ -4,7 +4,7 @@ import History from "./Pages/History"
 import LandingPage from "./Pages/LandingPage"
 import Preview from "./Pages/Preview"
 import SelectMedicines from "./Pages/SelectMedicines"
-import UserView from "./Pages/UserView" 
+import UserView from "./Pages/Userview" 
 import { Routes, Route } from 'react-router-dom'; 
 import Footer from "./Components/Footer"
 
