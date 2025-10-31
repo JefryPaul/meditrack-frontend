@@ -9,11 +9,23 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  useMediaQuery,
+  Card,
+  CardContent,
+  Divider,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 
 function UserView() {
+  const medicines = [
+    { id: 1, name: "Paracetamol", category: "Tablet", quantity: 50, price: 120, expiry: "2025-12-31", supplier: "ABC Pharma" },
+    { id: 2, name: "Cough Syrup", category: "Syrup", quantity: 20, price: 200, expiry: "2025-08-15", supplier: "XYZ Pharma" },
+    { id: 3, name: "Vitamin D", category: "Capsule", quantity: 30, price: 150, expiry: "2026-03-10", supplier: "LMN Pharma" },
+  ];
+
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <>
       <Box maxWidth={900} mx="auto" mt={5}>
@@ -26,66 +38,62 @@ function UserView() {
           Medicine Inventory
         </Typography>
 
-        <TableContainer component={Paper} elevation={3}>
-          <Table>
-            <TableHead sx={{ backgroundColor: "#2a9d8f" }}>
-              <TableRow>
-                <TableCell sx={{ color: "white", fontWeight: "bold" }}>#</TableCell>
-                <TableCell sx={{ color: "white", fontWeight: "bold" }}>Medicine Name</TableCell>
-                <TableCell sx={{ color: "white", fontWeight: "bold" }}>Category</TableCell>
-                <TableCell sx={{ color: "white", fontWeight: "bold" }}>Quantity</TableCell>
-                <TableCell sx={{ color: "white", fontWeight: "bold" }}>Price (₹)</TableCell>
-                <TableCell sx={{ color: "white", fontWeight: "bold" }}>Expiry Date</TableCell>
-                <TableCell sx={{ color: "white", fontWeight: "bold" }}>Supplier</TableCell>
-              </TableRow>
-            </TableHead>
+        {/* Responsive layout: Table for desktop, Card for mobile */}
+        {!isMobile ? (
+          <TableContainer component={Paper} elevation={3}>
+            <Table>
+              <TableHead sx={{ backgroundColor: "#2a9d8f" }}>
+                <TableRow>
+                  <TableCell sx={{ color: "white", fontWeight: "bold" }}>#</TableCell>
+                  <TableCell sx={{ color: "white", fontWeight: "bold" }}>Medicine Name</TableCell>
+                  <TableCell sx={{ color: "white", fontWeight: "bold" }}>Category</TableCell>
+                  <TableCell sx={{ color: "white", fontWeight: "bold" }}>Quantity</TableCell>
+                  <TableCell sx={{ color: "white", fontWeight: "bold" }}>Price (₹)</TableCell>
+                  <TableCell sx={{ color: "white", fontWeight: "bold" }}>Expiry Date</TableCell>
+                  <TableCell sx={{ color: "white", fontWeight: "bold" }}>Supplier</TableCell>
+                </TableRow>
+              </TableHead>
 
-            <TableBody>
-              <TableRow>
-                <TableCell>1</TableCell>
-                <TableCell>Paracetamol</TableCell>
-                <TableCell>Tablet</TableCell>
-                <TableCell>50</TableCell>
-                <TableCell>₹120</TableCell>
-                <TableCell>2025-12-31</TableCell>
-                <TableCell>ABC Pharma</TableCell>
-
-              </TableRow>
-
-              <TableRow>
-                <TableCell>2</TableCell>
-                <TableCell>Cough Syrup</TableCell>
-                <TableCell>Syrup</TableCell>
-                <TableCell>20</TableCell>
-                <TableCell>₹200</TableCell>
-                <TableCell>2025-08-15</TableCell>
-                <TableCell>XYZ Pharma</TableCell>
-
-              </TableRow>
-
-              <TableRow>
-                <TableCell>3</TableCell>
-                <TableCell>Vitamin D</TableCell>
-                <TableCell>Capsule</TableCell>
-                <TableCell>30</TableCell>
-                <TableCell>₹150</TableCell>
-                <TableCell>2026-03-10</TableCell>
-                <TableCell>LMN Pharma</TableCell>
-
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+              <TableBody>
+                {medicines.map((med) => (
+                  <TableRow key={med.id}>
+                    <TableCell>{med.id}</TableCell>
+                    <TableCell>{med.name}</TableCell>
+                    <TableCell>{med.category}</TableCell>
+                    <TableCell>{med.quantity}</TableCell>
+                    <TableCell>₹{med.price}</TableCell>
+                    <TableCell>{med.expiry}</TableCell>
+                    <TableCell>{med.supplier}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : (
+          // Mobile View: Card Layout
+          <Box>
+            {medicines.map((med) => (
+              <Card key={med.id} sx={{ mb: 2, borderLeft: "5px solid #2a9d8f" }}>
+                <CardContent>
+                  <Typography variant="h6" sx={{ fontWeight: "bold", color: "#2a9d8f" }}>
+                    {med.name}
+                  </Typography>
+                  <Typography>Category: {med.category}</Typography>
+                  <Typography>Quantity: {med.quantity}</Typography>
+                  <Typography>Price: ₹{med.price}</Typography>
+                  <Typography>Expiry: {med.expiry}</Typography>
+                  <Typography>Supplier: {med.supplier}</Typography>
+                  <Divider sx={{ my: 1 }} />
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
+        )}
 
         <Typography sx={{ mt: 3, textAlign: "center", color: "#777" }}>
           Showing all available medicines in inventory
         </Typography>
       </Box>
-
-
-
-
-
 
       <Box
         mt={5}
@@ -123,7 +131,7 @@ function UserView() {
         </Link>
       </Box>
     </>
-  )
+  );
 }
 
-export default UserView
+export default UserView;
