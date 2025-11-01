@@ -38,7 +38,6 @@ function UserView() {
           Medicine Inventory
         </Typography>
 
-        {/* Responsive layout: Table for desktop, Card for mobile */}
         {!isMobile ? (
           <TableContainer component={Paper} elevation={3}>
             <Table>
@@ -70,7 +69,6 @@ function UserView() {
             </Table>
           </TableContainer>
         ) : (
-          // Mobile View: Card Layout
           <Box>
             {medicines.map((med) => (
               <Card key={med.id} sx={{ mb: 2, borderLeft: "5px solid #2a9d8f" }}>
