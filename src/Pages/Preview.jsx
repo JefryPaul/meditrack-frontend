@@ -48,7 +48,6 @@ function Preview() {
         }}
       >
         {!isMobile ? (
-          // 💻 Desktop View: Table Format
           <Table>
             <TableHead sx={{ backgroundColor: "#2a9d8f" }}>
               <TableRow>
@@ -75,7 +74,6 @@ function Preview() {
             </TableBody>
           </Table>
         ) : (
-          // 📱 Mobile View: Card Format
           <Box>
             {medicines.map((m) => (
               <Card
